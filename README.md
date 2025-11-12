@@ -21,6 +21,7 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
+      // ------>Pablo Angel Gonzalez Zorro<------
       // Other configs...
 
       // Remove tseslint.configs.recommended and replace with this
@@ -67,7 +68,11 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
+      // ------>Pablo Angel Gonzalez Zorro<------
     },
   },
 ])
 ```
+
+
+
