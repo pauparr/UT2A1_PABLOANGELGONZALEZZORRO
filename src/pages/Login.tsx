@@ -1,60 +1,41 @@
-import { Container,Typography, Button, Stack } from "@mui/material";
-import React from "react";
+import { useState } from "react";
+import { Box, Button, TextField, Typography, Avatar, Paper, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
-    return (
-        
-        <div>
-            <Container>
-                <Typography variant="h1" color="primary" gutterBottom>
-          Pablo Ángel González Zorro(Texto princupal)
-        </Typography>
-            <Typography variant="h2" color="secondary" gutterBottom>
-        Textp secundario
-      </Typography>
-      <Typography variant="h3" color="warning.main" gutterBottom>
-        Texto warning
-      </Typography>
-      <Typography variant="subtitle1" color="info.main" gutterBottom>
-        Texto informativo
-      </Typography>
-      <Typography variant="body1" color="success.main" gutterBottom>
-        Texto succes
-      </Typography>
-      <Typography variant="caption" color="text.secondary" display="block">
-        Quiero jugar al minecraft profe
-      </Typography>
-      <Stack>
-          <Button variant="text" color="primary">
-            Text Primario
+export default function Login() {
+  const [usuario, setUsuario] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const navigate = useNavigate();
+
+  const bduser = "patricia";
+  const bdpasswd = "1234";
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (usuario === bduser && contrasena === bdpasswd) {
+      navigate("/home");
+    } else {
+      setMensaje("Usuario o contraseña incorrectos");
+    }
+  };
+
+  return (
+    <Box sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Paper elevation={3} sx={{ width: 400, p: 3, borderRadius: 2, textAlign: "center" }}>
+        <Typography variant="h6" sx={{ mb: 1 }}>Login Pablo Angel Gonzalez Zorro</Typography>
+
+
+        <Box component="form" onSubmit={handleSubmit}>
+          <TextField label="Usuario" fullWidth required margin="normal" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+          <TextField label="Contraseña" type="password" fullWidth required margin="normal" value={contrasena} onChange={(e) => setContrasena(e.target.value)} />
+          <Button variant="contained" type="submit" fullWidth sx={{ mt: 2 }}>
+            ACCEDER
           </Button>
+        </Box>
 
-          <Button variant="contained" color="secondary">
-            Contained Secundario
-          </Button>
-
-          <Button variant="outlined" color="error">
-            Outlined Error
-          </Button>
-
-          <Button variant="contained" color="success">
-            Contained Éxito
-          </Button>
-
-          <Button variant="outlined" color="warning">
-            Outlined Advertencia
-          </Button>
-
-          <Button variant="text" color="info">
-            Text Info
-          </Button>
-        </Stack>
-        </Container>
-
-        
-        </div>
-    
-    );
-};
-
-export { Login }
+        {mensaje && <Alert severity="error" sx={{ mt: 2 }} variant="filled" onClose={() => setMensaje("")}>{mensaje}</Alert>}
+      </Paper>
+    </Box>
+  );
+}

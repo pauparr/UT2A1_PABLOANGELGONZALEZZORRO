@@ -1,17 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Login } from './pages/Login'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Reports from "./pages/Reports";
+import ErrorPage from "./pages/ErrorPage";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./App.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+   errorElement: <ErrorPage />, 
+    children: [
+      {
+        index: true,
+        element: <Login />,
+      },
+      {
+        path: "home",
+        element: <Home />,
+      },
+      {
+        path: "reports",
+        element: <Reports />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div>
-      <Login />
-    </div>
-  )
+    <>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
-export default App
+export default App;
