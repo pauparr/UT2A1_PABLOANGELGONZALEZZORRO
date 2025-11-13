@@ -1,9 +1,7 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
-// Importamos el useSelector y useDispatch de react-redux
 import { useSelector, useDispatch } from "react-redux";
-// Importamos el tipo RootState del store
 import type { RootState } from "../store/index";
-// Importamos las acciones del slice de autenticación
+
 import { authActions } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -12,12 +10,12 @@ export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Comprobamos en consola lo que obtenemos del store
+  
   console.log(userData);
 
   const handleLogout = () => {
-    dispatch(authActions.logout()); // cerramos sesión
-    navigate("/"); // volvemos al login
+    dispatch(authActions.logout()); 
+    navigate("/"); 
   };
 
   return (
